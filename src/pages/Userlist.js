@@ -22,14 +22,32 @@ const Userlist = () => {
 
     return (
         <div>
-            <h1>
                 {/* {users.length} */}
+                <table class="table">
+                <thead>
+                      <tr>
+                        <th scope="col">UserId</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">ROLE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
                 {users.map(u => (
-                    <h1>
-                        {u.email}
-                    </h1>
+                    <>
+                      <tr>
+                        <th scope="row">{u._id}</th>
+                        <td>{u.name}</td>
+                        <td>{u.email}</td>
+                        <td>{u.role}</td>
+                      </tr>
+                    </>
                 ))}
-            </h1>
+                                    </tbody>
+
+                </table>
+
         </div>
     );
 };
