@@ -25,13 +25,13 @@ const Navibar = () => {
                             <DropdownItem href='/bbs/notice'>
                                 공지사항
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem href='/bbs/bbs'>
                                 자유게시판
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem href='/bbs/bbs'>
                                 질문게시판
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem href='/bbs/bbs'>
                                 합격수기
                             </DropdownItem>
                         </DropdownMenu>

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Container, Table, Spinner } from 'reactstrap';
+import { Loading } from '../../components';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Psat = () => {
     const [Psat, setPsat] = useState([]);
@@ -27,15 +29,7 @@ const Psat = () => {
     return (
         <Container>
             {loading 
-                ? (
-                    <Spinner
-                        color="secondary"
-                        style={{margin: 'auto', display: 'block', width: '60px', height: '60px', borderWidth: '10px'}}
-                    >
-                        Loading...
-                    </Spinner>
-                    
-                ) 
+                ? <Loading />
                 : (
                     <div>
                         <br />
@@ -56,7 +50,7 @@ const Psat = () => {
                         </thead>
                         <tbody>
                             {Psat.map(u => (
-                                <>
+                                <LinkContainer to={`${u._id}`}>
                                     <tr>
                                         <th scope="row">{u._id}</th>
                                         <td>{u.title}</td>
@@ -65,7 +59,7 @@ const Psat = () => {
                                         <td>{u.comment.length}</td>
                                         <td>{u.likes.length}</td>
                                     </tr>
-                                </>
+                                </LinkContainer>
                             ))}
                         </tbody>
                     </Table>

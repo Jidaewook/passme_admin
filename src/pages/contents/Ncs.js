@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Container, Table, Spinner } from 'reactstrap';
+import { Loading } from '../../components';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Ncs = () => {
 
@@ -28,14 +30,7 @@ const Ncs = () => {
     return (
         <Container>
             {loading 
-                ? (
-                    <Spinner
-                        color="secondary"
-                        style={{margin: 'auto', display: 'block', width: '60px', height: '60px', borderWidth: '10px'}}
-                    >
-                        Loading...
-                    </Spinner>
-                ) 
+                ? <Loading />
                 : (
                     <div>
                         <br />
@@ -56,7 +51,7 @@ const Ncs = () => {
                             </thead>
                             <tbody>
                                 {ncs.map(u => (
-                                    <>
+                                    <LinkContainer to={`${u._id}`}>
                                         <tr>
                                             <th scope="row">{u._id}</th>
                                             <td>{u.title}</td>
@@ -65,7 +60,7 @@ const Ncs = () => {
                                             <td>{u.comment.length}</td>
                                             <td>{u.likes.length}</td>
                                         </tr>
-                                    </>
+                                    </LinkContainer>
                                 ))}
                             </tbody>
                         </Table>
