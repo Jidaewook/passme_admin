@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Container, Table } from 'reactstrap';
 
 const Notice = () => {
     const [notice, setNotice] = useState([]);
@@ -21,15 +22,18 @@ const Notice = () => {
     }, [])
 
     return (
-        <div>
-            <table class="table">
+        <Container>
+            <br />
+            <h1>
+                NOTICE DB
+            </h1>
+            <br />
+            <Table hover>
                 <thead>
                     <tr>
                         <th scope="col">NoticeId</th>
                         <th scope="col">Title</th>
                         <th scope="col">Desc</th>
-                        <th scope="col">수정</th>
-                        <th scope="col">삭제</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,15 +43,12 @@ const Notice = () => {
                                 <th scope="row">{u._id}</th>
                                 <td>{u.title}</td>
                                 <td>{u.desc}</td>
-                                <td><button type="button" class="btn btn-secondary">수정</button></td>
-                                <td><button type="button" class="btn btn-secondary">삭제</button></td>
-
                             </tr>
                         </>
                     ))}
                 </tbody>
-            </table>
-        </div>
+            </Table>
+        </Container>
     );
 };
 

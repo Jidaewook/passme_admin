@@ -37,32 +37,39 @@ const Ncs = () => {
                     </Spinner>
                 ) 
                 : (
-                <Table hover>
-                    <thead>
-                        <tr>
-                            <th scope="col">NcsId</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Desc</th>
-                            <th scope="col">URL</th>
-                            <th size="5" scope="col">Comments</th>
-                            <th scope="col">Likes</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {ncs.map(u => (
-                                <>
-                                    <tr>
-                                        <th scope="row">{u._id}</th>
-                                        <td>{u.title}</td>
-                                        <td>{u.desc}</td>
-                                        <td>{u.url}</td>
-                                        <td>{u.comment.length}</td>
-                                        <td>{u.likes.length}</td>
-                                    </tr>
-                                </>
-                            ))}
-                        </tbody>
-                    </Table>
+                    <div>
+                        <br />
+                        <h1>
+                            NCS DB
+                        </h1>
+                        <br />
+                    <Table hover>
+                        <thead>
+                            <tr>
+                                <th scope="col">NcsId</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Desc</th>
+                                <th scope="col">URL</th>
+                                <th size="5" scope="col">Comments</th>
+                                <th scope="col">Likes</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {ncs.map(u => (
+                                    <>
+                                        <tr>
+                                            <th scope="row">{u._id}</th>
+                                            <td>{u.title}</td>
+                                            <td>{u.desc}</td>
+                                            <td>{u.url}</td>
+                                            <td>{u.comment.length}</td>
+                                            <td>{u.likes.length}</td>
+                                        </tr>
+                                    </>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </div>
                 )
             }
         </Container>

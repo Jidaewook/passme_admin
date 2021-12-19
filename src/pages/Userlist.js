@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { Container, Table } from 'reactstrap';
+
 
 const Userlist = () => {
 
@@ -21,9 +23,13 @@ const Userlist = () => {
     }, [])
 
     return (
-        <div>
-                {/* {users.length} */}
-                <table class="table">
+        <Container>
+                <br />
+                <h1>
+                    USER DB
+                </h1>
+                <br />
+                <Table hover>
                 <thead>
                       <tr>
                         <th scope="col">UserId</th>
@@ -46,9 +52,9 @@ const Userlist = () => {
                 ))}
                                     </tbody>
 
-                </table>
+                </Table>
 
-        </div>
+        </Container>
     );
 };
 

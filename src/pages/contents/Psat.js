@@ -37,7 +37,13 @@ const Psat = () => {
                     
                 ) 
                 : (
-                    <Table hover>
+                    <div>
+                        <br />
+                        <h1>
+                            PSAT DB
+                        </h1>
+                        <br />
+                        <Table hover>
                         <thead>
                             <tr>
                                 <th scope="col">PsatId</th>
@@ -63,6 +69,8 @@ const Psat = () => {
                             ))}
                         </tbody>
                     </Table>
+                    </div>
+                    
                 )
             }
             

@@ -1,57 +1,60 @@
 import React from 'react';
+import { Collapse, Container, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarText, NavbarToggler, NavItem, NavLink, UncontrolledDropdown } from 'reactstrap';
 
 const Navibar = () => {
     return (
-        <nav
-            className='navbar navbar-expand-sm navbar-dark bg-dark mb-4'
-        >
-            <div
-                className='container'
-            >
-                <a
-                    className='navbar-brand'
-                >
-                    PASSME ADMIN
-                </a>
-                <button
-                    className='navbar-toggler'
-                    type='button'
-                    data-toggle='collapse'
-                    data-target="#mobile-nav"
-                >
-                    <span className='navbar-toggler-icon' />
-                </button>
-            </div>
-            
-            <div className='dropdown'>
-                <button className='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenu2' data-bs-toggle='dropdown' aria-expanded='false' >
-                    게시물관리
-                </button>
-                <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
-                    <li><button className='dropdown-item' type='button'>공지사항</button></li>
-                    <li><button className='dropdown-item' type='button'>게시판</button></li>
-                </ul>
-            </div>
-            <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                    회원관리
-                </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><button className="dropdown-item" type="button">회원정보</button></li>
-                </ul>
-            </div>
-            <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                    콘텐츠관리
-                </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><button className="dropdown-item" type="button">NCS</button></li>
-                    <li><button className="dropdown-item" type="button">PSAT</button></li>
-                    <li><button className="dropdown-item" type="button">학습지</button></li>
-
-                </ul>
-            </div>
-        </nav>
+        <Navbar color='dark' dark expand='lg'>  
+            <NavbarBrand className='me-auto' href='/'>PASSME</NavbarBrand>
+            <NavbarText>
+            <NavbarToggler 
+                className="me-2"
+                onClick={function noRefCheck(){}}  
+            />
+            <Collapse navbar>
+                <Nav className='me-auto' navbar>
+                    <NavItem>
+                        <NavLink href='/users'>
+                            회원관리
+                        </NavLink>
+                    </NavItem>
+                    <UncontrolledDropdown inNavbar nav>
+                        <DropdownToggle caret nav>
+                            게시물관리
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem href='/bbs/notice'>
+                                공지사항
+                            </DropdownItem>
+                            <DropdownItem>
+                                자유게시판
+                            </DropdownItem>
+                            <DropdownItem>
+                                질문게시판
+                            </DropdownItem>
+                            <DropdownItem>
+                                합격수기
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                    <UncontrolledDropdown
+                        inNavbar nav
+                    >
+                        <DropdownToggle caret nav>
+                            콘텐츠관리
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem href='/contents/ncs'>
+                                NCS
+                            </DropdownItem>
+                            <DropdownItem href='/contents/psat'>
+                                PSAT
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                </Nav>
+            </Collapse>
+            </NavbarText>
+        </Navbar>
     );
 };
 
