@@ -9,6 +9,7 @@ const Landing = () => {
         password: ""
     })
 
+
     const {email, password} = formdata
     
     const submitHandler = async (e) => {
@@ -16,6 +17,7 @@ const Landing = () => {
         try {
             const {data} = await axios.post('http://passmebackend-env.eba-vtsbabpw.us-east-2.elasticbeanstalk.com/users/login', formdata)
             console.log(data)
+            
         }
         catch (e) {
             console.log(e)

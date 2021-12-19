@@ -22,23 +22,33 @@ const Navibar = () => {
                     <span className='navbar-toggler-icon' />
                 </button>
             </div>
-            <div className="collapse navbar-collapse" id="mobile-nav">
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <a className="nav-link" herf="register.html">
-                            게시물관리
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" herf="login.html">
-                            콘텐츠관리
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" herf="login.html">
-                            회원관리
-                        </a>
-                    </li>
+            
+            <div className='dropdown'>
+                <button className='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenu2' data-bs-toggle='dropdown' aria-expanded='false' >
+                    게시물관리
+                </button>
+                <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
+                    <li><button className='dropdown-item' type='button'>공지사항</button></li>
+                    <li><button className='dropdown-item' type='button'>게시판</button></li>
+                </ul>
+            </div>
+            <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    회원관리
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><button className="dropdown-item" type="button">회원정보</button></li>
+                </ul>
+            </div>
+            <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    콘텐츠관리
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><button className="dropdown-item" type="button">NCS</button></li>
+                    <li><button className="dropdown-item" type="button">PSAT</button></li>
+                    <li><button className="dropdown-item" type="button">학습지</button></li>
+
                 </ul>
             </div>
         </nav>

@@ -3,4 +3,10 @@ import ContentsList from "./ContentsList";
 import AgreeTerms from "./AgreeTerms";
 import Privacy from "./Privacy";
 
-export {Userlist, ContentsList, Privacy, AgreeTerms}
+import Ncs from "./contents/Ncs";
+import Psat from "./contents/Psat";
+
+import Notice from "./bbs/Notice";
+
+
+export {Userlist, ContentsList, Privacy, AgreeTerms, Ncs, Psat, Notice}

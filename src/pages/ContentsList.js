@@ -7,7 +7,8 @@ const ContentsList = () => {
 
     const getNcs = async () => {
         try {
-            const {data} = await axios.get('http://passmebackend-env.eba-vtsbabpw.us-east-2.elasticbeanstalk.com/ncs')
+            const {data} = await axios.get('/ncs')
+            // const {data} = await axios.get('http://localhost:8081/ncs')
             console.log(data)
             setNcs(data.results)
         } catch (e) {
