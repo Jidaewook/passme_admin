@@ -2,21 +2,28 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useParams, useLocation } from 'react-router-dom';
 import { Loading } from '../../components';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Table } from 'reactstrap';
 
-const BbsDetail = () => {
+const NoticeDetail = () => {
 
     const {id} = useParams();
     const {pathname} = useLocation();
-    console.log(pathname)
+    // console.log(pathname)
 
-    const [bbs, setBbs] = useState({});
+    const [notice, setNotice] = useState({});
     const [loading, setLoading] = useState(true);
 
-    const getBbs = async () => {
+    const getNotice = async () => {
         try{
-            const {data} = await axios.get(`/bbs/${id}`)
-            setBbs(data)
+            const {data} = pathname.includes('notice')
+                ? (
+                    await axios.get(`/notice/${id}`)
+                )
+                : (
+                    await axios.get(`/alarm/${id}`)
+                )
+            setNotice(data)
             console.log(data)
             setLoading(false)
         }
@@ -27,7 +34,7 @@ const BbsDetail = () => {
     }
 
     useEffect(() => {
-        getBbs()
+        getNotice()
     }, [])
 
     return (
@@ -38,7 +45,7 @@ const BbsDetail = () => {
                     <>
                     <br/>
                     <h1>
-                        BbsDetail
+                        Notice Detail
                     </h1>
                     <br/>
                     <Table hover>
@@ -51,27 +58,23 @@ const BbsDetail = () => {
                         <tbody>
                             <tr>
                                 <th scope="row">ID</th>
-                                <th scope="row">{bbs.results._id}</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">카테고리</th>
-                                <td>{bbs.results.category}</td>
+                                <th scope="row">{notice.results._id}</th>
                             </tr>
                             <tr>
                                 <th scope="row">제목</th>
-                                <td>{bbs.results.title}</td>
+                                <td>{notice.results.title}</td>
                             </tr>
                             <tr>
                                 <th scope="row">글 내용</th>
-                                <td>{bbs.results.desc}</td>
+                                <td>{notice.results.desc}</td>
                             </tr>
                             <tr>
                                 <th scope="row">장르</th>
-                                <td>{bbs.results.genres_ids}</td>
+                                <td>{notice.results.genres_ids}</td>
                             </tr>
                             <tr>
                                 <th scope="row">유튜브 주소</th>
-                                <td>{bbs.results.url}</td>
+                                <td>{notice.results.url}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -83,4 +86,4 @@ const BbsDetail = () => {
     );
 };
 
-export default BbsDetail;
+export default NoticeDetail;

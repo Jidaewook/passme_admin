@@ -9,13 +9,9 @@ import { useLocation } from 'react-router-dom';
 const Bbs = () => {
 
     const {pathname} = useLocation();
-    console.log(pathname)
-
+    // console.log(pathname)
 
     const [bbs, setBbs] = useState([]);
-    const [free, setFree] = useState([]);
-    const [qna, setQna] = useState([]);
-    const [pass, setPass] = useState([]);
 
     const [loading, setLoading] = useState(true);
 

@@ -51,13 +51,11 @@ const Userlist = () => {
                             
                             {users.map(u => (
                                 <LinkContainer to={`/users/${u._id}`}>
-
                                     <tr>
                                             <th scope="row">{u._id}</th>
                                             <td>{u.name}</td>
                                             <td>{u.email}</td>
                                             <td>{u.role}</td>
-                                        
                                     </tr>
                                 </LinkContainer>
 
