@@ -15,5 +15,7 @@ import NoticeDetail from "./bbs/NoticeDetail";
 
 import UserDetail from "./users/UserDetail";
 
+import Register from "./Register";
 
-export {Userlist, ContentsList, Privacy, AgreeTerms, Ncs, ContentsDetail, Psat, Notice, Bbs, BbsDetail, NoticeDetail, UserDetail}
+
+export {Userlist, ContentsList, Privacy, AgreeTerms, Ncs, ContentsDetail, Psat, Notice, Bbs, BbsDetail, NoticeDetail, UserDetail, Register}

@@ -40,10 +40,14 @@ const Userlist = () => {
                     <Table hover>
                     <thead>
                           <tr>
-                            <th scope="col">UserId</th>
                             <th scope="col">NAME</th>
                             <th scope="col">EMAIL</th>
+                            <th scope="col">INSTITUE</th>
+                            <th scope="col">AREA</th>
                             <th scope="col">ROLE</th>
+                            <th scope="col">JOIN DATE</th>
+                            <th scope="col">UPDATE DATE</th>
+
                           </tr>
                         </thead>
 
@@ -52,13 +56,15 @@ const Userlist = () => {
                             {users.map(u => (
                                 <LinkContainer to={`/users/${u._id}`}>
                                     <tr>
-                                            <th scope="row">{u._id}</th>
-                                            <td>{u.name}</td>
-                                            <td>{u.email}</td>
-                                            <td>{u.role}</td>
+                                        <td>{u.name}</td>
+                                        <td>{u.email}</td>
+                                        <td>{u.institue}</td>
+                                        <td>{u.area}</td>
+                                        <td>{u.role}</td>
+                                        <td>{u.createdAt.slice(0,10)}</td>
+                                        <td>{u.updatedAt.slice(0,10)}</td>
                                     </tr>
                                 </LinkContainer>
-
                             ))}
                         </tbody>
                     </Table>

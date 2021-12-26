@@ -38,8 +38,11 @@ const BbsDetail = () => {
                     <>
                     <br/>
                     <h1>
-                        BbsDetail
+                        BBS   
                     </h1>
+                    <h3>
+                        {bbs.results._id}
+                    </h3>
                     <br/>
                     <Table hover>
                         <thead>
@@ -54,10 +57,6 @@ const BbsDetail = () => {
                                 <th scope="row">{bbs.results._id}</th>
                             </tr>
                             <tr>
-                                <th scope="row">카테고리</th>
-                                <td>{bbs.results.category}</td>
-                            </tr>
-                            <tr>
                                 <th scope="row">제목</th>
                                 <td>{bbs.results.title}</td>
                             </tr>
@@ -66,8 +65,14 @@ const BbsDetail = () => {
                                 <td>{bbs.results.desc}</td>
                             </tr>
                             <tr>
-                                <th scope="row">장르</th>
-                                <td>{bbs.results.genres_ids}</td>
+                                <th scope="row">카테고리</th>
+                                <td>
+                                    {bbs.results.category && bbs.results.category.map((cate, index) => (
+                                        index === bbs.results.category.length - 1 
+                                            ? cate
+                                            : `${cate}, `
+                                    ))}
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">유튜브 주소</th>

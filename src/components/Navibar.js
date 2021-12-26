@@ -3,7 +3,7 @@ import { Collapse, Container, DropdownItem, DropdownMenu, DropdownToggle, Nav, N
 
 const Navibar = () => {
     return (
-        <Navbar color='dark' dark expand='lg'>  
+        <Navbar color='dark' dark expand='md' container='fluid'>  
             <NavbarBrand className='me-auto' href='/'>PASSME</NavbarBrand>
             <NavbarText>
             <NavbarToggler 
@@ -17,12 +17,12 @@ const Navibar = () => {
                             회원관리
                         </NavLink>
                     </NavItem>
-                    <UncontrolledDropdown inNavbar nav>
-                        <DropdownToggle caret nav>
+                    <UncontrolledDropdown inNavbar nav >
+                        <DropdownToggle caret nav  >
                             게시물관리
                         </DropdownToggle>
-                        <DropdownMenu right>
-                            <DropdownItem href='/bbs/notice'>
+                        <DropdownMenu right dark >
+                            <DropdownItem href='/bbs/notice' className={{fontColor: 'dark'}} >
                                 공지사항
                             </DropdownItem>
                             <DropdownItem href='/bbs/bbs'>
@@ -42,7 +42,7 @@ const Navibar = () => {
                         <DropdownToggle caret nav>
                             콘텐츠관리
                         </DropdownToggle>
-                        <DropdownMenu right>
+                        <DropdownMenu right dark>
                             <DropdownItem href='/contents/ncs'>
                                 NCS
                             </DropdownItem>
