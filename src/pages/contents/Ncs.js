@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Container, Table, Spinner, Row, Button } from 'reactstrap';
-import { Loading } from '../../components';
+import { Loading, TextFiledGroup } from '../../components';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Ncs = () => {
 
@@ -30,6 +30,8 @@ const Ncs = () => {
         getNcs()
     }, [])
 
+    const category = 'ncs'
+
     return (
         <Container>
             {loading 
@@ -43,11 +45,19 @@ const Ncs = () => {
                                 </h1>
                             </div>
                             <div className='col-md mt-3 m-auto'>
+                                {/* <Link 
+                                    // block 
+                                    // color='primary' 
+                                    // size='md'
+                                    to={() => navigate('/Register', {contents: 'ncs'})}
+                                >
+                                    신규 콘텐츠 등록
+                                </Link> */}
                                 <Button 
                                     block 
                                     color='primary' 
                                     size='md'
-                                    onClick={() => navigate('/Register')}
+                                    onClick={() => navigate(`/register/${category}`)}
                                 >
                                     신규 콘텐츠 등록
                                 </Button>
@@ -70,20 +80,53 @@ const Ncs = () => {
                                     <LinkContainer to={`${u._id}`}>
                                         <tr>
                                             <td>
-                                                {u.title.length > 15
-                                                    ? `${u.title.slice(0,15)}...` 
-                                                    : u.title
-                                                }
+                                                <TextFiledGroup 
+                                                    placeholder={"제목"}
+                                                    name={'title'}
+                                                    value={
+                                                        u.title.length > 15
+                                                            ? `${u.title.slice(0,15)}...` 
+                                                            : u.title
+                                                    }
+                                                    disabled
+                                                />
                                             </td>
                                             <td>
-                                                {u.desc.length > 25 
-                                                    ? `${u.desc.slice(0,25)}...`
-                                                    : u.desc
-                                                }
+                                                <TextFiledGroup 
+                                                    placeholder={"설명"}
+                                                    name={'desc'}
+                                                    value={
+                                                        u.desc.length > 25 
+                                                            ? `${u.desc.slice(0,25)}...`
+                                                            : u.desc
+                                                    }
+                                                    disabled
+                                                />
                                             </td>
-                                            <td>{u.url}</td>
-                                            <td>{u.comment.length}</td>
-                                            <td>{u.likes.length}</td>
+                                            <td>
+                                                <TextFiledGroup 
+                                                    placeholder={"유튜브"}
+                                                    name={'url'}
+                                                    value={u.url}
+                                                    disabled
+                                                />
+                                            </td>
+                                            <td>
+                                                <TextFiledGroup 
+                                                    placeholder={"댓글수"}
+                                                    name={'comment'}
+                                                    value={u.comment.length}
+                                                    disabled
+                                                />
+                                            </td>
+                                            <td>
+                                                <TextFiledGroup 
+                                                    placeholder={"좋아요수"}
+                                                    name={'like'}
+                                                    value={u.likes.length}
+                                                    disabled
+                                                />
+                                            </td>
                                         </tr>
                                     </LinkContainer>
                                 ))}

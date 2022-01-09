@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Container, Table, Button, Row } from 'reactstrap';
-import { Loading } from '../../components';
+import { Loading, TextFiledGroup } from '../../components';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Bbs = () => {
 
@@ -13,6 +14,8 @@ const Bbs = () => {
     const [bbs, setBbs] = useState([]);
 
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     const getBbs = async () => {
         try {
@@ -44,7 +47,7 @@ const Bbs = () => {
                         block 
                         color='primary' 
                         size='md'
-                        onClick={console.log("jjjjjjj")}
+                        onClick={() => navigate('/Register', {contents: 'bbs'})}
                     >
                         신규 게시물 등록
                     </Button>
@@ -66,7 +69,7 @@ const Bbs = () => {
                         <tbody>
                             {bbs.map(u => (
                                 <LinkContainer to={`${u._id}`}>
-                                    <tr>
+                                    {/* <tr>
                                         <td>{u.category}</td>
                                         <td>
                                             {u.title.length > 15
@@ -79,6 +82,40 @@ const Bbs = () => {
                                                 ? `${u.desc.slice(0,25)}...`
                                                 : u.desc
                                             }
+                                        </td>
+                                    </tr> */}
+                                    <tr>
+                                        <td>
+                                            <TextFiledGroup 
+                                                placeholder={"카테고리"}
+                                                name={'category'}
+                                                value={u.category}
+                                                disabled
+                                            />
+                                        </td>
+                                        <td>
+                                            <TextFiledGroup 
+                                                placeholder={"제목"}
+                                                name={'title'}
+                                                value={
+                                                    u.title.length > 15
+                                                        ? `${u.title.slice(0,15)}...` 
+                                                        : u.title
+                                                }
+                                                disabled
+                                            />
+                                        </td>
+                                        <td>
+                                            <TextFiledGroup 
+                                                placeholder={"설명"}
+                                                name={'desc'}
+                                                value={
+                                                    u.desc.length > 25 
+                                                        ? `${u.desc.slice(0,25)}...`
+                                                        : u.desc
+                                                }
+                                                disabled
+                                            />
                                         </td>
                                     </tr>
                                 </LinkContainer>

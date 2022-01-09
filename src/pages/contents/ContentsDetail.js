@@ -12,25 +12,64 @@ const ContentsDetail = () => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
-    const [detail, setDetail] = useState({});
+
+    const [detail, setDetail] = useState({
+        title: '',
+        desc: '',
+        url: '',
+        poster: '',
+        backdrop: '',
+        genres_ids: [],
+        comment: 0,
+        likes: 0
+    });
+
+    const {title, desc, url, poster, backdrop, genres_ids, comment, likes, createdAt, updatedAt} = detail
 
     const getDetail = async () => {
         try {
             
             const {data} = pathname.includes('ncs') 
-                ? (
-                    await axios.get(`/ncs/${id}`)
-                ) 
-                : (
-                    await axios.get(`/psat/${id}`)
-                )
-            setDetail(data)
+                ? await axios.get(`/ncs/${id}`)
+                : await axios.get(`/psat/${id}`)
+            
+            console.log('url', data)
+            setDetail(data.results)
             setLoading(false)
             // console.log(data)
         }
         catch (e) {
             console.log(e)
         }
+    }
+
+    const onChange = async (e) => {
+        setDetail({...detail, [e.target.name]: e.target.value})
+    }
+
+    const editDetail = async (e) => {
+        e.preventDefault();
+        const detailInfo = {
+            title, desc, url, poster, backdrop, genres_ids
+        }
+        console.log(detailInfo)
+        setLoading(true)
+
+        console.log(pathname.includes('ncs'))
+
+        try {
+            const res = pathname.includes('ncs') 
+                ? await axios.put(`http://localhost:8081/ncs/${id}`, detailInfo)
+                : await axios.put(`http://localhost:8081/psat/${id}`, detailInfo)
+            
+            setLoading(false)
+            console.log('수정완료', res)
+            
+        } catch (e) {
+            console.log(e.message)
+            setLoading(false)
+        }
+        
     }
 
     useEffect(() => {
@@ -49,7 +88,7 @@ const ContentsDetail = () => {
                             </div>
                             <div className='mt-3 flex-end'>
                                 <h3>
-                                    {detail.results.title.slice(0, 9)}
+                                    {detail.title.slice(0, 9)}
                                 </h3>
                             </div>
                         </Row>
@@ -68,7 +107,7 @@ const ContentsDetail = () => {
                                         <TextFiledGroup
                                             placeholder={"ID"}
                                             name={"ID"}
-                                            value={detail.results._id}
+                                            value={detail._id}
                                             disabled
                                         />
                                     </td>
@@ -79,7 +118,8 @@ const ContentsDetail = () => {
                                         <TextFiledGroup 
                                             placeholder={"TITLE"}
                                             name={"title"}
-                                            value={detail.results.title}
+                                            value={title}
+                                            onChange={onChange}
                                         />
                                     </td>
                                 </tr>
@@ -89,7 +129,8 @@ const ContentsDetail = () => {
                                         <TextFiledGroup 
                                             placeholder={"DESC"}
                                             name={"desc"}
-                                            value={detail.results.desc}
+                                            value={desc}
+                                            onChange={onChange}
                                         />
                                     </td>
                                 </tr>
@@ -98,8 +139,9 @@ const ContentsDetail = () => {
                                     <td>
                                         <TextFiledGroup 
                                             placeholder={"GENRES"}
-                                            name={"genre"}
-                                            value={detail.results.genres_ids}
+                                            name={"genres_ids"}
+                                            value={genres_ids}
+                                            onChange={onChange}
                                         />
                                     </td>
                                 </tr>
@@ -108,8 +150,9 @@ const ContentsDetail = () => {
                                     <td>
                                         <TextFiledGroup 
                                             placeholder={"YOUTUBE"}
-                                            name={"youtube"}
-                                            value={detail.results.url}
+                                            name={"url"}
+                                            value={url}
+                                            onChange={onChange}
                                         />
                                     </td>
                                 </tr>
@@ -118,8 +161,8 @@ const ContentsDetail = () => {
                                     <td>
                                         <TextFiledGroup 
                                             placeholder={"COMMENTSCOUNT"}
-                                            name={"commcount"}
-                                            value={detail.results.comment.length}
+                                            name={"comment"}
+                                            value={comment.length}
                                             disabled
                                         />
                                     </td>
@@ -130,7 +173,7 @@ const ContentsDetail = () => {
                                         <TextFiledGroup 
                                             placeholder={"LIKESCOUNT"}
                                             name={"likecount"}
-                                            value={detail.results.likes.length}
+                                            value={likes.length}
                                             disabled
                                         />
                                     </td>
@@ -141,7 +184,7 @@ const ContentsDetail = () => {
                                         <TextFiledGroup 
                                             placeholder={"CREATEDAT"}
                                             name={"createdAT"}
-                                            value={detail.results.createdAt.slice(0,10)}
+                                            value={createdAt.slice(0,10)}
                                             disabled
                                         />
                                     </td>
@@ -152,7 +195,7 @@ const ContentsDetail = () => {
                                         <TextFiledGroup 
                                             placeholder={"UPDATEDAt"}
                                             name={"updatedAt"}
-                                            value={detail.results.updatedAt.slice(0,10)}
+                                            value={updatedAt.slice(0,10)}
                                             disabled
                                         />
                                     </td>
@@ -171,7 +214,9 @@ const ContentsDetail = () => {
                                 </Button>
                             </div>
                             <div>
-                                <Button block color='dark' size='lg'>
+                                <Button block color='dark' size='lg'
+                                    onClick={editDetail}
+                                >
                                     수정하기
                                 </Button>
                             </div>

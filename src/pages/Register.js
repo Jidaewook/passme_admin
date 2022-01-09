@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { Container, Table, Row, Button, Form } from 'reactstrap';
+import { Container, Row, Button, Form, Input } from 'reactstrap';
 import { Loading, TextFiledGroup, TextAreaFiledGroup } from '../components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const Register = ({src}) => {
+const Register = () => {
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         title: '',
@@ -17,9 +17,14 @@ const Register = ({src}) => {
         url: ''
     })
     
+    const {category} = useParams();
+    console.log('++++++', category)
+    // const contentsTitle = contents
+
     const {title, desc, genre, poster, backdrop, url} = formData
 
     const navigate = useNavigate();
+
 
     const onChange = async (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -31,25 +36,31 @@ const Register = ({src}) => {
             title, desc, genre, poster, backdrop, url
         }
         console.log(userInput)
+        setLoading(true)
         try {
-            const {data} = await axios.post('http://localhost:8081/ncs', userInput)
+            const {data} = await axios.post(`/${category}`, userInput)
             console.log("POST ++++", data)
+            setLoading(false)
         } catch (e) {
             console.log(e)
+            setLoading(false)
         }
     }
 
 
     return (
-        <div>
-            <Container>
-                <Row>
+        <Container>
+            {loading 
+                ? (
+                    <Loading />
+                ) 
+                : (<Row>
                     <div className='col-md-8 mt-3 m-auto'> 
                         <Button color='light' onClick={() => navigate(-1)}>
                             GO BACK
                         </Button>
                         <h1 className='display-4 text-center'>
-                            REGISTER NCS
+                            REGISTER
                         </h1>
                     </div>
                     <p className='lead text-center'>
@@ -69,6 +80,13 @@ const Register = ({src}) => {
                             value={desc}
                             onChange={onChange}
                         />
+                        {/* <Input
+                            type="textarea"
+                            placeholder={"* DESCRIPTION"}
+                            name={"desc"}
+                            value={desc}
+                            onChange={onChange}
+                        /> */}
                         <TextFiledGroup 
                             placeholder={"GENRE"}
                             name={"genre"}
@@ -99,10 +117,11 @@ const Register = ({src}) => {
                             className="btn btn-dark btn-block mt-4"
                         />
                     </Form>
-                </Row>
-                
-            </Container>
-        </div>
+                </Row>)
+            }
+            
+            
+        </Container>
     );
 };
 

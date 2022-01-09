@@ -10,8 +10,28 @@ const UserDetail = () => {
 
     const navigate = useNavigate();
     
-    const [user, setUser] = useState({})
-    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState({
+        name: '',
+        institue: '',
+        area: '',
+        role: ''
+    })
+
+    const [loading, setLoading] = useState(false);
+
+    const token = localStorage.getItem('jwtToken')
+
+    const config = {
+        headers : {
+            Authorization: token
+        }
+    }
+
+    const onChange = async (e) => {
+        setUser({...user, [e.target.name]: e.target.value})
+    }
+
+    const {name, institue, introduce, area, role} = user
 
     const getUser = async () => {
         try {
@@ -30,6 +50,24 @@ const UserDetail = () => {
 
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    const editUser = async (e) => {
+        e.preventDefault();
+        const userInfo = {
+            name, institue, introduce, area, role
+        }
+        console.log(userInfo)
+        setLoading(true)
+        try {
+            const res = await axios.put(`http://localhost:8081/users/${id}`, userInfo, config)
+            console.log('++++res', res.status)
+            setLoading(false)
+        }
+        catch (e) {
+            console.log(e)
+            setLoading(false)
         }
     }
 
@@ -93,6 +131,7 @@ const UserDetail = () => {
                                                 placeholder={"이름"}
                                                 name={'name'}
                                                 value={user.name}
+                                                onChange={onChange}
                                             />
                                         </td>
                                     </tr>
@@ -103,6 +142,7 @@ const UserDetail = () => {
                                                 placeholder={"이메일"}
                                                 name={"email"}
                                                 value={user.email}
+                                                disabled
                                             />                                        
                                         </td>
                                     </tr>
@@ -112,7 +152,7 @@ const UserDetail = () => {
                                             <TextFiledGroup 
                                                 placeholder={"가입일"}
                                                 name={"createdAt"}
-                                                value={user.createdAt.slice(0,10)}
+                                                value={user.createdAt}
                                                 disabled
                                             />
                                         </td>
@@ -124,6 +164,7 @@ const UserDetail = () => {
                                                 placeholder={"선호기관"}
                                                 name={"institue"}
                                                 value={user.institue}
+                                                onChange={onChange}
                                             />
                                         </td>
                                     </tr>
@@ -134,6 +175,7 @@ const UserDetail = () => {
                                                 placeholder={"거주지역"}
                                                 name={"area"}
                                                 value={user.area}
+                                                onChange={onChange}
                                             />
                                             {/* <SelectListGroup 
                                                 placeholder={"거주지역"}
@@ -141,6 +183,17 @@ const UserDetail = () => {
                                                 value={user.area}
                                                 options={regionOptions}
                                             /> */}
+                                        </td>                                
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">자기소개</th>
+                                        <td>
+                                            <TextFiledGroup 
+                                                placeholder={"자기소개"}
+                                                name={"introduce"}
+                                                value={user.introduce}
+                                                disabled
+                                            />
                                         </td>                                
                                     </tr>
                                 </tbody>
@@ -157,7 +210,13 @@ const UserDetail = () => {
                                 </Button>
                             </div>
                             <div>
-                                <Button block color='dark' size='lg'>
+                                <Button 
+                                    block 
+                                    color='dark' 
+                                    size='lg'
+                                    onClick={editUser}
+                                
+                                >
                                     수정하기
                                 </Button>
                             </div>

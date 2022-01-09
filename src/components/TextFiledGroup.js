@@ -1,23 +1,21 @@
 import React from 'react';
-import { Input } from 'reactstrap';
+import { FormGroup, Input } from 'reactstrap';
 
 const TextFiledGroup = ({
     name, placeholder, value, error, info, type, onChange, disabled
 }) => {
 
     return (
-        <>
+        <FormGroup>
             <Input
                 type={type}
-                bsSize='lg' 
-                className='mb-2 mt-2'
                 placeholder={placeholder}
                 name={name}
                 value={value}
                 onChange={onChange}
                 disabled={disabled}           
             />        
-        </>
+        </FormGroup>
     );
 };
 
