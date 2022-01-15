@@ -86,36 +86,21 @@ const Bbs = () => {
                                     </tr> */}
                                     <tr>
                                         <td>
-                                            <TextFiledGroup 
-                                                placeholder={"카테고리"}
-                                                name={'category'}
-                                                value={u.category}
-                                                disabled
-                                            />
+                                            {u.category}
                                         </td>
                                         <td>
-                                            <TextFiledGroup 
-                                                placeholder={"제목"}
-                                                name={'title'}
-                                                value={
-                                                    u.title.length > 15
-                                                        ? `${u.title.slice(0,15)}...` 
-                                                        : u.title
-                                                }
-                                                disabled
-                                            />
+                                            {
+                                            u.title.length > 15
+                                                ? `${u.title.slice(0,15)}...` 
+                                                : u.title
+                                            }
                                         </td>
-                                        <td>
-                                            <TextFiledGroup 
-                                                placeholder={"설명"}
-                                                name={'desc'}
-                                                value={
-                                                    u.desc.length > 25 
-                                                        ? `${u.desc.slice(0,25)}...`
-                                                        : u.desc
-                                                }
-                                                disabled
-                                            />
+                                        <td>    
+                                            {
+                                                u.desc.length > 25 
+                                                    ? `${u.desc.slice(0,25)}...`
+                                                    : u.desc
+                                            }
                                         </td>
                                     </tr>
                                 </LinkContainer>

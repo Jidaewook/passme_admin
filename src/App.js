@@ -1,7 +1,7 @@
 import React from 'react';
 import "./App.css"
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { Userlist, ContentsList, AgreeTerms, Privacy, Ncs, ContentsDetail, Psat, Notice, UserDetail, BbsDetail, Bbs, NoticeDetail, Register } from './pages';
+import { Userlist, ContentsList, AgreeTerms, Privacy, Ncs, ContentsDetail, Psat, Notice, UserDetail, BbsDetail, Bbs, NoticeDetail, Register, RegisterUser } from './pages';
 
 import { Footer, Navibar, Landing } from './components';
 
@@ -31,6 +31,7 @@ const App = () => {
           <Route exact path="/bbs/notice/:id" element={<NoticeDetail />} />
 
           <Route exact path="/register/:category" element={<Register />} />
+          <Route exact path="/register/user" element={<RegisterUser />} />
 
 
         </Routes>

@@ -80,52 +80,27 @@ const Ncs = () => {
                                     <LinkContainer to={`${u._id}`}>
                                         <tr>
                                             <td>
-                                                <TextFiledGroup 
-                                                    placeholder={"제목"}
-                                                    name={'title'}
-                                                    value={
-                                                        u.title.length > 15
-                                                            ? `${u.title.slice(0,15)}...` 
-                                                            : u.title
-                                                    }
-                                                    disabled
-                                                />
+                                                {
+                                                    u.title.length > 15
+                                                        ? `${u.title.slice(0,15)}...` 
+                                                        : u.title
+                                                }
                                             </td>
                                             <td>
-                                                <TextFiledGroup 
-                                                    placeholder={"설명"}
-                                                    name={'desc'}
-                                                    value={
-                                                        u.desc.length > 25 
-                                                            ? `${u.desc.slice(0,25)}...`
-                                                            : u.desc
-                                                    }
-                                                    disabled
-                                                />
+                                                {
+                                                    u.desc.length > 25 
+                                                        ? `${u.desc.slice(0,25)}...`
+                                                        : u.desc
+                                                }
                                             </td>
                                             <td>
-                                                <TextFiledGroup 
-                                                    placeholder={"유튜브"}
-                                                    name={'url'}
-                                                    value={u.url}
-                                                    disabled
-                                                />
+                                                {u.url}
                                             </td>
                                             <td>
-                                                <TextFiledGroup 
-                                                    placeholder={"댓글수"}
-                                                    name={'comment'}
-                                                    value={u.comment.length}
-                                                    disabled
-                                                />
+                                                {u.comment.length}
                                             </td>
                                             <td>
-                                                <TextFiledGroup 
-                                                    placeholder={"좋아요수"}
-                                                    name={'like'}
-                                                    value={u.likes.length}
-                                                    disabled
-                                                />
+                                                {u.likes.length}
                                             </td>
                                         </tr>
                                     </LinkContainer>

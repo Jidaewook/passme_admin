@@ -68,8 +68,22 @@ const ContentsDetail = () => {
         } catch (e) {
             console.log(e.message)
             setLoading(false)
+        }   
+    }
+
+    const deleteDetail = async (e) => {
+        e.preventDefault();
+        setLoading(true)
+        try{
+            const res = pathname.includes('ncs')
+                ? await axios.delete(`http://localhost:8081/ncs/${id}`)
+                : await axios.delete(`http://localhost:8081/psat/${id}`)
+            setLoading(false)
+            navigate('/contents/ncs')
+        } catch (e) {
+            console.log(e.message)
+            setLoading(false)
         }
-        
     }
 
     useEffect(() => {
@@ -184,7 +198,7 @@ const ContentsDetail = () => {
                                         <TextFiledGroup 
                                             placeholder={"CREATEDAT"}
                                             name={"createdAT"}
-                                            value={createdAt.slice(0,10)}
+                                            // value={createdAt.slice(0,10)}
                                             disabled
                                         />
                                     </td>
@@ -195,7 +209,7 @@ const ContentsDetail = () => {
                                         <TextFiledGroup 
                                             placeholder={"UPDATEDAt"}
                                             name={"updatedAt"}
-                                            value={updatedAt.slice(0,10)}
+                                            // value={updatedAt.slice(0,10)}
                                             disabled
                                         />
                                     </td>
@@ -208,7 +222,7 @@ const ContentsDetail = () => {
                                     block 
                                     color='danger' 
                                     size='lg'
-                                    onClick={console.log("jjjjjjj")}
+                                    onClick={deleteDetail}
                                 >
                                     삭제하기
                                 </Button>

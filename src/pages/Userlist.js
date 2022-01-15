@@ -48,7 +48,7 @@ const Userlist = () => {
                                     block 
                                     color='primary' 
                                     size='md'
-                                    onClick={() => navigate('/Register', {contents: 'user'})}
+                                    onClick={() => navigate('/register/user')}
                                 >
                                     신규 유저 등록
                                 </Button>
