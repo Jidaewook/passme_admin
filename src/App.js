@@ -3,7 +3,7 @@ import "./App.css"
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import { Userlist, ContentsList, AgreeTerms, Privacy, Ncs, ContentsDetail, Psat, Notice, UserDetail, BbsDetail, Bbs, NoticeDetail, Register, RegisterUser } from './pages';
+import { Main, Userlist, ContentsList, AgreeTerms, Privacy, Ncs, ContentsDetail, Psat, Notice, UserDetail, BbsDetail, Bbs, NoticeDetail, Register, RegisterUser } from './pages';
 
 import { Footer, Navibar, Landing } from './components';
 
@@ -14,6 +14,7 @@ const App = () => {
             <Navibar />
             <Routes>
               <Route exact path="/" element={<Landing />} />
+              <Route exact path="/main" element={<Main />} />
               <Route exact path="/users" element={<Userlist />} />
               <Route exact path="/users/:id" element={<UserDetail />} />
 

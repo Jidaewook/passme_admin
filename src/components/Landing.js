@@ -10,7 +10,10 @@ const Landing = () => {
     const navigate = useNavigate()
     const {isFetching, isSuccess, isError, errorMessage} = useSelector(
         userSelector
+
     )
+
+    console.log('isSuccess', isSuccess)
 
     const [formdata, setFormdata] = useState({
         email: "",
@@ -42,7 +45,7 @@ const Landing = () => {
         }
         if (isSuccess) {
             dispatch(clearState())
-            navigate('/users')
+            navigate('/main')
         }
     }, [isError, isSuccess])
 

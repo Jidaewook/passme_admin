@@ -1,3 +1,5 @@
+import Main from './Main'
+
 import Userlist from "./Userlist";
 import ContentsList from "./ContentsList";
 import AgreeTerms from "./AgreeTerms";
@@ -19,4 +21,4 @@ import Register from "./Register";
 import RegisterUser from "./users/RegisterUser";
 
 
-export {Userlist, ContentsList, Privacy, AgreeTerms, Ncs, ContentsDetail, Psat, Notice, Bbs, BbsDetail, NoticeDetail, UserDetail, Register, RegisterUser}
+export {Main, Userlist, ContentsList, Privacy, AgreeTerms, Ncs, ContentsDetail, Psat, Notice, Bbs, BbsDetail, NoticeDetail, UserDetail, Register, RegisterUser}
