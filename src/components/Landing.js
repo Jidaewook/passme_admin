@@ -1,35 +1,54 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser, userSelector, clearState } from '../features/UserSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const {isFetching, isSuccess, isError, errorMessage} = useSelector(
+        userSelector
+    )
 
     const [formdata, setFormdata] = useState({
         email: "",
         password: ""
     })
 
+    const [token, setToken] = useState('')
 
     const {email, password} = formdata
     
     const submitHandler = async (e) => {
-        e.preventDefault();
-        try {
-            const {data} = await axios.post('http://passmebackend-env.eba-vtsbabpw.us-east-2.elasticbeanstalk.com/users/login', formdata)
-            console.log(data)
-            
-        }
-        catch (e) {
-            console.log(e)
-        }
+        e.preventDefault()
+        dispatch(loginUser(formdata))
     }
 
     const changeHandler = (e) => {
         setFormdata({...formdata, [e.target.name]: e.target.value})
     }
 
+    useEffect(() => (
+        dispatch(clearState())
+    ), [])
+
+    useEffect(() => {
+        if (isError) {
+            alert.error(errorMessage);
+            dispatch(clearState())
+
+        }
+        if (isSuccess) {
+            dispatch(clearState())
+            navigate('/users')
+        }
+    }, [isError, isSuccess])
+
     return (
         <div className='login'>
+            {token}
             <div className='container'>
                 <div className='row'>
                     <div className='col-md-8 m-auto'>

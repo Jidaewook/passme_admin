@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Container, Row, Button, Form } from 'reactstrap';
+import { Container, Row, Button, Form, Alert } from 'reactstrap';
 import { Loading, TextFiledGroup, TextAreaFiledGroup } from '../../components';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -18,6 +18,8 @@ const RegisterUser = () => {
         area: '', 
         role: '',
     })
+
+    const [message, setMessage] = useState(''); 
     
     const {category} = useParams();
     console.log('++++++', category)
@@ -43,10 +45,13 @@ const RegisterUser = () => {
             const res = await axios.post('http://localhost:8081/users/register', userInput)
             console.log("POST ++++", res)
             setLoading(false)
-            navigate('/users')
+            setMessage('등록 완료')
+            
+
         } catch (e) {
             console.log(e)
             setLoading(false)
+            setMessage(e.message)
         }
     }
 
@@ -59,6 +64,13 @@ const RegisterUser = () => {
                 ) 
                 : (<Row>
                     <div className='col-md-8 mt-3 m-auto'> 
+                        {message 
+                            ? (
+                                <Alert color="primary">
+                                    {message}
+                                </Alert>
+                            ) 
+                            : null}
                         <Button color='light' onClick={() => navigate(-1)}>
                             GO BACK
                         </Button>

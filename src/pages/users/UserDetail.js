@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Button, Container, Table, Row } from 'reactstrap';
+import { Button, Container, Table, Row, Alert } from 'reactstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Loading, TextFiledGroup } from '../../components';
@@ -18,6 +18,7 @@ const UserDetail = () => {
     })
 
     const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
 
     const token = localStorage.getItem('jwtToken')
 
@@ -45,11 +46,17 @@ const UserDetail = () => {
         }
     }
 
-    const deleteUser = async () => {
-        try {
+    const deleteUser = async (e) => {
+        e.preventDefault();
+        setLoading(true)
 
+        try {
+            const res = await axios.delete(`http://localhost:8081/users/${id}`)
+            setLoading(false)
+            setMessage('삭제 완료')
         } catch (e) {
             console.log(e)
+            setMessage(e.message)
         }
     }
 
@@ -64,10 +71,12 @@ const UserDetail = () => {
             const res = await axios.put(`http://localhost:8081/users/${id}`, userInfo, config)
             console.log('++++res', res.status)
             setLoading(false)
+            setMessage('수정 완료')
         }
         catch (e) {
             console.log(e)
             setLoading(false)
+            setMessage(e.message)
         }
     }
 
@@ -105,6 +114,11 @@ const UserDetail = () => {
                             
                         </Row>
                         <br/>
+                        {message ? (
+                            <Alert color="primary">
+                                {message}
+                            </Alert>
+                        ) : null}
                         <Table>
                             <thead>
                                 <tr>
@@ -204,7 +218,7 @@ const UserDetail = () => {
                                     block 
                                     color='danger' 
                                     size='lg'
-                                    onClick={console.log("jjjjjjj")}
+                                    onClick={deleteUser}
                                 >
                                     삭제하기
                                 </Button>

@@ -1,18 +1,28 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Container, Table, Spinner, Row, Button } from 'reactstrap';
-import { Loading, TextFiledGroup } from '../../components';
+import { Container, Table, Row, Button } from 'reactstrap';
+import { Loading } from '../../components';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
 
 const Ncs = () => {
 
-    const [ncs, setNcs] = useState([]);
-
-    const [loading, setLoading] = useState(true);
-
     const navigate = useNavigate();
 
+    // const fetcher = (url) => fetch(url).then(res => res.json())
+
+    // const {data, error} = useSWR(
+    //   "/ncs",
+    //   fetcher
+  
+    // )
+  
+    // console.log(data)
+
+    const [ncs, setNcs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
     const getNcs = async () => {
         try {
             const {data} = await axios.get('/ncs')
@@ -31,6 +41,7 @@ const Ncs = () => {
     }, [])
 
     const category = 'ncs'
+
 
     return (
         <Container>
@@ -114,4 +125,4 @@ const Ncs = () => {
     );
 };
 
-export default Ncs;
+export default Ncs

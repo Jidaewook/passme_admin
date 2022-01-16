@@ -2,16 +2,29 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useParams, useLocation } from 'react-router-dom';
 import { Loading } from '../../components';
-import { Container, Table } from 'reactstrap';
+import { Container, Table, Row, Button } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 
 const BbsDetail = () => {
 
     const {id} = useParams();
     const {pathname} = useLocation();
-    console.log(pathname)
-
-    const [bbs, setBbs] = useState({});
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+
+    const [bbs, setBbs] = useState({
+        title: '',
+        desc: '',
+        poster: '',
+        category: [],
+        tag: [],
+        comment: 0,
+        likes: 0,
+        attached: '',
+        url: ''
+    });
+    
+    const {title, desc, poster, category, tag, comment, likes, attached, url } = bbs
 
     const getBbs = async () => {
         try{
@@ -26,6 +39,44 @@ const BbsDetail = () => {
         }
     }
 
+    const onChange = async (e) => {
+        setBbs({...bbs, [e.target.name]: e.target.value})
+    }
+
+    const editBbs = async (e) => {
+        e.preventDefault();
+        const bbsInfo = {
+            title, desc, poster, category, tag, comment, likes, attached, url
+        }
+        console.log(bbsInfo)
+        setLoading(true)
+
+        try {   
+            const res = await axios.put(`/bbs/${id}`)
+            setLoading(false)
+            console.log('수정완료', res)
+        } catch(e) {
+            console.log(e.message)
+            setLoading(false)
+        }
+        
+    }
+
+
+    const deleteBbs = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const res = await axios.delete(`/bbs/${id}`)
+            setLoading(false)
+            navigate('/bbs/bbs')
+        } catch (e) {
+            console.log(e.message)
+            setLoading(false)
+        }
+    }
+
+    
     useEffect(() => {
         getBbs()
     }, [])
@@ -36,13 +87,16 @@ const BbsDetail = () => {
                 ? <Loading /> 
                 : (
                     <>
-                    <br/>
-                    <h1>
-                        BBS   
-                    </h1>
-                    <h3>
-                        {bbs.results._id}
-                    </h3>
+                    <Row xs="4"> 
+                            <div className='col-md mt-3 m-auto'>
+                                <button type='button' className='btn btn-light' onClick={() => navigate(-1)}>Go Back</button>
+                            </div>
+                            <div className='mt-3 flex-end'>
+                                <h3>
+                                    {bbs.title}
+                                </h3>
+                            </div>
+                        </Row>
                     <br/>
                     <Table hover>
                         <thead>
@@ -80,6 +134,25 @@ const BbsDetail = () => {
                             </tr>
                         </tbody>
                     </Table>
+                    <Row xs='2'>
+                            <div>
+                                <Button 
+                                    block 
+                                    color='danger' 
+                                    size='lg'
+                                    onClick={deleteBbs}
+                                >
+                                    삭제하기
+                                </Button>
+                            </div>
+                            <div>
+                                <Button block color='dark' size='lg'
+                                    onClick={editBbs}
+                                >
+                                    수정하기
+                                </Button>
+                            </div>
+                        </Row>
                     </>
                 )
             }

@@ -4,6 +4,7 @@ import { Container, Table, Button, Row } from 'reactstrap';
 import { Loading, TextFiledGroup } from '../components';
 import {LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
 
 const Userlist = () => {
 
@@ -28,6 +29,12 @@ const Userlist = () => {
     useEffect(() => {
         getUserData()
     }, [])
+
+    const fetcher = (url) => fetch(url).then((res) => res.json())
+
+    const {data, error} = useSWR('/users', fetcher)
+    console.log('data', data)
+
 
     return (
         <Container>
@@ -65,8 +72,8 @@ const Userlist = () => {
                                     <th scope="col">INSTITUE</th>
                                     <th scope="col">AREA</th>
                                     <th scope="col">ROLE</th>
-                                    <th scope="col">JOIN DATE</th>
-                                    <th scope="col">UPDATE DATE</th>
+                                    <th scope="col">JOIN</th>
+                                    <th scope="col">UPDATE</th>
 
                                 </tr>
                             </thead>
